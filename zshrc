@@ -28,8 +28,10 @@ export TBDIR="/usr/local/tinderbox"
 export TOP="-PI"
 
 PATH="${PATH}:/usr/ports/Tools/scripts"
-[ $UID -ne 0 -a -n "$(id | grep wheel)" ] && \
+if [ $UID -ne 0 -a -n "$(id | grep wheel)" ]; then
 	PATH="${PATH}:/sbin:/usr/sbin:/usr/local/sbin"
+	alias spkg="sudo pkg"
+fi
 [ -d "${HOME}/bin" ] && PATH="${PATH}:${HOME}/bin"
 export PATH
 
