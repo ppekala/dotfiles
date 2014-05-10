@@ -1,6 +1,7 @@
 
 bindkey '\e[H' beginning-of-line
 bindkey '\e[F' end-of-line
+bindkey '^[[3~' delete-char
 
 zstyle :compinstall filename '/home/corn/.zshrc'
 
