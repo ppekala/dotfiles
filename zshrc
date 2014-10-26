@@ -28,7 +28,7 @@ export TBCONF="/usr/local/tinderbox/scripts/etc/env/GLOBAL"
 export TBDIR="/usr/local/tinderbox"
 export TOP="-PI"
 
-PATH="${PATH}:/usr/ports/Tools/scripts"
+PATH="${PATH}:${PORTSDIR:-/usr/ports}/Tools/scripts"
 if [ $UID -ne 0 -a -n "$(id | grep wheel)" ]; then
 	PATH="${PATH}:/sbin:/usr/sbin:/usr/local/sbin"
 	alias spkg="sudo pkg"
