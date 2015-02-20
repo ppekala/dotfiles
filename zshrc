@@ -21,11 +21,11 @@ export FREEBSD_LOGIN="pawel"
 export H="${HOME}"
 export LESS="-R --clear-screen --quit-if-one-screen --ignore-case --SILENT --chop-long-lines --tabs=3"
 export LSCOLORS="Exfxcxdxbxegedabagacad"
+which most >/dev/null && export MANPAGER="most"
 export PAGER="less"
+which cdiff >/dev/null  && export PAGER_DIFF="cdiff"
 export PMK="/usr/ports/Mk"
 export PSVN="svnlite"
-export TBCONF="/usr/local/tinderbox/scripts/etc/env/GLOBAL"
-export TBDIR="/usr/local/tinderbox"
 export TOP="-PI"
 
 PATH="${PATH}:${PORTSDIR:-/usr/ports}/Tools/scripts"
@@ -37,10 +37,16 @@ fi
 export PATH
 
 alias del="rm -i"
-alias df="df -h"
+which dfc >/dev/null && alias df="dfc" || alias df="df -h"
 alias du="du -h"
 alias ll="ls -Glh"
 alias ls="ls -Gh"
+
+if [ -n "${PAGER_DIFF}" ]; then
+	alias sdc="svn diff | ${PAGER_DIFF}"
+else
+	alias sdc="svn diff | ${PAGER}"
+fi
 
 [ -f "${HOME}/.zshuser" ] && . "${HOME}/.zshuser"
 
