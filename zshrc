@@ -35,6 +35,7 @@ if [ $UID -ne 0 -a -n "$(id | grep wheel)" ]; then
 fi
 [ -d "${HOME}/bin" ] && PATH="${PATH}:${HOME}/bin"
 export PATH
+[ -d "${HOME}/tmp" ] || mkdir ${HOME}/tmp
 
 alias del="rm -i"
 which dfc >/dev/null && alias df="dfc" || alias df="df -h"
