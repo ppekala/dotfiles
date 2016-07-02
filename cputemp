@@ -1,0 +1,10 @@
+#!/bin/sh
+i=0
+ncpu=$(sysctl -n hw.ncpu)
+
+while true; do
+	[ ${i} -eq ${ncpu} ] && break
+	tempstr="${tempstr}  C${i}: $(sysctl -n dev.cpu.${i}.temperature| cut -d, -f1) C"
+	i=$((${i}+1))
+done
+echo "${tempstr}"
