@@ -28,7 +28,9 @@ export PMK="/usr/ports/Mk"
 export PSVN="svnlite"
 export TOP="-PI"
 
-PATH="${PATH}:${PORTSDIR:-/usr/ports}/Tools/scripts"
+readonly PORTSDIR="$(make -V PORTSDIR /usr/share/mk/bsd.ports.mk 2>/dev/null)"
+
+PATH="${PATH}:${PORTSDIR}/Tools/scripts"
 if [ $UID -ne 0 -a -n "$(id | grep wheel)" ]; then
 	PATH="${PATH}:/sbin:/usr/sbin:/usr/local/sbin"
 	alias spkg="sudo pkg"
