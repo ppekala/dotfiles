@@ -23,7 +23,6 @@ which most >/dev/null && export MANPAGER="most"
 export PAGER="less"
 which cdiff >/dev/null && export PAGER_DIFF="cdiff"
 export PSVN="svnlite"
-export TOP="-PI"
 
 readonly PORTSDIR="$(make -V PORTSDIR /usr/share/mk/bsd.ports.mk 2>/dev/null)"
 
@@ -41,6 +40,7 @@ which dfc >/dev/null && alias df="dfc" || alias df="df -h"
 alias du="du -h"
 alias ll="ls -Glh"
 alias ls="ls -Gh"
+alias top="top -PI"
 
 if [ -n "${PAGER_DIFF}" ]; then
 	alias sdc="svn diff | ${PAGER_DIFF}"
