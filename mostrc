@@ -1,0 +1,2 @@
+setkey bob	"\033[H"
+setkey eob	"\033[F"
