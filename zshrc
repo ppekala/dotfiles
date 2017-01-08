@@ -24,7 +24,9 @@ export PAGER="less"
 which cdiff >/dev/null && export PAGER_DIFF="cdiff"
 export PSVN="svnlite"
 
-readonly PORTSDIR="$(make -V PORTSDIR /usr/share/mk/bsd.ports.mk 2>/dev/null)"
+PORTSDIR="/usr/ports"
+[ -d "${PORTSDIR}" ] || PORTSDIR=$(make -V PORTSDIR)
+[ -d "${PORTSDIR}" ] && export PORTSDIR || unset PORTSDIR
 
 PATH="${PATH}:${PORTSDIR}/Tools/scripts"
 if [ $UID -ne 0 -a -n "$(id | grep wheel)" ]; then
