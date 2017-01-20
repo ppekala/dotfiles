@@ -5,7 +5,7 @@ homedir=$(realpath "$HOME")
 confdir=${srcdir#$homedir/}
 
 cd "$HOME"
-for config in conkyrc mostrc vimrc zshrc; do
+for config in conkyrc mostrc muttrc vimrc zshrc; do
 	[ -e .$config ] || ln -sv "$confdir/$config" .$config
 done
 

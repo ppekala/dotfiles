@@ -1,0 +1,11 @@
+color normal		brightwhite	default
+color hdrdefault	cyan		default
+color error		brightwhite	brightred
+color indicator		brightwhite	green
+color message		brightwhite	default
+color status		white		blue
+color tree		brightmagenta	default
+
+set delete=yes
+set pager_index_lines=7
+set pager_stop=yes
