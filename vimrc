@@ -18,6 +18,7 @@ syntax enable
 
 let g:airline_theme='murmur'
 
+set backspace=indent,eol,start
 set dir=~/tmp
 set laststatus=2
 set nobackup
