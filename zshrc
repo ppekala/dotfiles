@@ -15,24 +15,25 @@ PS1="%{${fg[green]}%}%B[%m@%~]%#%b "
 
 export BLOCKSIZE="K"
 export EDITOR="vim"
-export FREEBSD_LOGIN="pawel"
 export H="${HOME}"
 export LESS="-R --clear-screen --quit-if-one-screen --ignore-case --SILENT --chop-long-lines --tabs=3"
 export LSCOLORS="Exfxcxdxbxegedabagacad"
 which most >/dev/null && export MANPAGER="most"
 export PAGER="less"
 which cdiff >/dev/null && export PAGER_DIFF="cdiff"
-export PSVN="svnlite"
 
-PORTSDIR="/usr/ports"
-[ -d "${PORTSDIR}" ] || PORTSDIR=$(make -V PORTSDIR)
-[ -d "${PORTSDIR}" ] && export PORTSDIR || unset PORTSDIR
+if [ "$(uname -s)" = "FreeBSD" ]; then
+	PORTSDIR="/usr/ports"
+	[ -d "${PORTSDIR}" ] || PORTSDIR=$(make -V PORTSDIR)
+	[ -d "${PORTSDIR}" ] && export PORTSDIR || unset PORTSDIR
 
-PATH="${PATH}:${PORTSDIR}/Tools/scripts"
-if [ $UID -ne 0 -a -n "$(id | grep wheel)" ]; then
-	PATH="${PATH}:/sbin:/usr/sbin:/usr/local/sbin"
-	alias spkg="sudo pkg"
+	PATH="${PATH}:${PORTSDIR}/Tools/scripts"
+	if [ $UID -ne 0 -a -n "$(id | grep wheel)" ]; then
+		PATH="${PATH}:/sbin:/usr/sbin:/usr/local/sbin"
+		alias spkg="sudo pkg"
+	fi
 fi
+
 [ -d "${HOME}/bin" ] && PATH="${PATH}:${HOME}/bin"
 export PATH
 [ -d "${HOME}/tmp" ] || mkdir ${HOME}/tmp
