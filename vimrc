@@ -28,6 +28,7 @@ set ruler
 set t_Co=256
 
 nnoremap <silent> <F2> :NERDTree<CR>
+nnoremap <silent> <F3> :set spell!<CR>
 nnoremap <silent> <F12> :BufExplorer<CR>
 nnoremap <silent> <C-B><Right> :bnext!<CR>
 nnoremap <silent> <C-X> :bnext!<CR>
@@ -39,6 +40,7 @@ nnoremap <silent> <C-T>c :tabclose<CR>
 nnoremap <silent> <C-T><Left> :tabprevious<CR>
 nnoremap <silent> <C-T><Right> :tabnext<CR>
 
+highlight SpellBad ctermfg=red ctermbg=NONE guifg=red guibg=NONE
 autocmd FileType gitcommit setlocal spell
 autocmd FileType svn setlocal spell
 
