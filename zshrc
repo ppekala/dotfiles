@@ -16,13 +16,16 @@ PS1="%{${fg[green]}%}%B[%m@%~]%#%b "
 export BLOCKSIZE="K"
 export EDITOR="vim"
 export H="${HOME}"
-export LESS="-R --clear-screen --quit-if-one-screen --ignore-case --SILENT --chop-long-lines --tabs=3"
 export LSCOLORS="Exfxcxdxbxegedabagacad"
 which most >/dev/null && export MANPAGER="most"
-export PAGER="less"
+if which less >/dev/null; then
+	export PAGER="less"
+	export LESS="-R --clear-screen --quit-if-one-screen --ignore-case --SILENT --chop-long-lines --tabs=3"
+fi
 which cdiff >/dev/null && export PAGER_DIFF="cdiff"
 
-if [ "$(uname -s)" = "FreeBSD" ]; then
+osname=$(uname -s)
+if [ "$osname" = "FreeBSD" ]; then
 	PORTSDIR="/usr/ports"
 	[ -d "${PORTSDIR}" ] || PORTSDIR=$(make -V PORTSDIR)
 	[ -d "${PORTSDIR}" ] && export PORTSDIR || unset PORTSDIR
@@ -32,6 +35,15 @@ if [ "$(uname -s)" = "FreeBSD" ]; then
 		PATH="${PATH}:/sbin:/usr/sbin:/usr/local/sbin"
 		alias spkg="sudo pkg"
 	fi
+
+	alias ll="ls -Glh"
+	alias ls="ls -Gh"
+	alias top="top -PI"
+fi
+
+if [ "$osname" = "Linux" ]; then
+	alias ll="ls -lh --color"
+	alias ls="ls -h --color"
 fi
 
 [ -d "${HOME}/bin" ] && PATH="${PATH}:${HOME}/bin"
@@ -41,9 +53,6 @@ export PATH
 alias del="rm -i"
 which dfc >/dev/null && alias df="dfc" || alias df="df -h"
 alias du="du -h"
-alias ll="ls -Glh"
-alias ls="ls -Gh"
-alias top="top -PI"
 
 if [ -n "${PAGER_DIFF}" ]; then
 	alias sdc="svn diff | ${PAGER_DIFF}"
