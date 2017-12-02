@@ -21,10 +21,12 @@ let g:airline_theme='murmur'
 
 set backspace=indent,eol,start
 set dir=~/tmp
+set ignorecase
 set laststatus=2
 set nobackup
 set nowrap
 set ruler
+set smartcase
 set t_Co=256
 
 nnoremap <silent> <F2> :NERDTree<CR>
