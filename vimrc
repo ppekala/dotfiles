@@ -43,7 +43,7 @@ nnoremap <silent> <C-T><Left> :tabprevious<CR>
 nnoremap <silent> <C-T><Right> :tabnext<CR>
 
 highlight SpellBad ctermfg=red ctermbg=NONE guifg=red guibg=NONE
-autocmd FileType gitcommit,svn setlocal spell
+autocmd FileType gitcommit,svn setlocal spell syntax=off
 autocmd FileType html,php,xhtml,xml setlocal shiftwidth=2 tabstop=2
 
 "highlight extra whitespace
