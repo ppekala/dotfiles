@@ -23,6 +23,8 @@ set backspace=indent,eol,start
 set dir=~/tmp
 set ignorecase
 set laststatus=2
+set list
+set listchars=tab:»\ ,trail:·
 set nobackup
 set nowrap
 set ruler
@@ -47,9 +49,8 @@ autocmd FileType gitcommit,svn setlocal spell syntax=off
 autocmd FileType html,php,xhtml,xml setlocal shiftwidth=2 tabstop=2
 
 "highlight extra whitespace
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+call matchadd("SpellBad", '\s\+$')
+autocmd BufWinEnter * call matchadd("SpellBad", '\s\+$')
+autocmd InsertEnter * call matchadd("SpellBad", '\s\+\%#\@<!$')
+autocmd InsertLeave * call matchadd("SpellBad", '\s\+$')
 autocmd BufWinLeave * call clearmatches()
