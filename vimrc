@@ -21,6 +21,7 @@ let g:airline_theme='murmur'
 
 set backspace=indent,eol,start
 set dir=~/tmp
+set hidden
 set ignorecase
 set laststatus=2
 set list
@@ -34,10 +35,10 @@ set t_Co=256
 nnoremap <silent> <F2> :NERDTree<CR>
 nnoremap <silent> <F3> :set spell!<CR>
 nnoremap <silent> <F12> :BufExplorer<CR>
-nnoremap <silent> <C-B><Right> :bnext!<CR>
-nnoremap <silent> <C-X> :bnext!<CR>
-nnoremap <silent> <C-B><Left> :bprevious!<CR>
-nnoremap <silent> <C-Z> :bprevious!<CR>
+nnoremap <silent> <C-B><Right> :bnext<CR>
+nnoremap <silent> <C-X> :bnext<CR>
+nnoremap <silent> <C-B><Left> :bprevious<CR>
+nnoremap <silent> <C-Z> :bprevious<CR>
 nnoremap <silent> <C-B>d :bdelete<CR>
 nnoremap <silent> <C-T>n :tabnew<CR>
 nnoremap <silent> <C-T>c :tabclose<CR>
