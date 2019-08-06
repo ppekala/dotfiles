@@ -22,7 +22,7 @@ if which less >/dev/null; then
 	export PAGER="less"
 	export LESS="-R --clear-screen --quit-if-one-screen --ignore-case --SILENT --chop-long-lines --tabs=3"
 fi
-which cdiff >/dev/null && export PAGER_DIFF="cdiff"
+which ydiff >/dev/null && export PAGER_DIFF="ydiff"
 
 osname=$(uname -s)
 if [ "$osname" = "FreeBSD" ]; then
