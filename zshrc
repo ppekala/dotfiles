@@ -11,7 +11,7 @@ autoload -Uz compinit && compinit
 setopt autocd
 setopt nobeep
 
-PS1="%{${fg[green]}%}%B[%m@%~]%#%b "
+PS1="%{${fg[green]}%}%B[%m@%3~]%#%b "
 
 export BLOCKSIZE="K"
 export EDITOR="vim"
