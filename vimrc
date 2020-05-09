@@ -29,8 +29,10 @@ set listchars=tab:»\ ,trail:·
 set nobackup
 set nowrap
 set ruler
+set shiftwidth=2
 set smartcase
 set t_Co=256
+set tabstop=2
 
 nnoremap <silent> <F2> :NERDTree<CR>
 nnoremap <silent> <F3> :set spell!<CR>
@@ -47,7 +49,7 @@ nnoremap <silent> <C-T><Right> :tabnext<CR>
 
 highlight SpellBad ctermfg=red ctermbg=NONE guifg=red guibg=NONE
 autocmd FileType gitcommit,svn setlocal spell syntax=off
-autocmd FileType html,php,xhtml,xml setlocal shiftwidth=2 tabstop=2
+autocmd FileType make setlocal shiftwidth=8 tabstop=8
 
 "highlight extra whitespace
 call matchadd("SpellBad", '\s\+$')
