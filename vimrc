@@ -24,7 +24,6 @@ set dir=~/tmp
 set laststatus=2
 set nobackup
 set nowrap
-set path+=**
 set ruler
 set t_Co=256
 
