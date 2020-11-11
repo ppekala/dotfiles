@@ -9,3 +9,4 @@ color tree		brightmagenta	default
 set delete=yes
 set pager_index_lines=7
 set pager_stop=yes
+set sort=reverse-date

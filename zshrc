@@ -3,7 +3,7 @@ bindkey '\e[H' beginning-of-line
 bindkey '\e[F' end-of-line
 bindkey '^[[3~' delete-char
 
-zstyle :compinstall filename '/home/corn/.zshrc'
+zstyle :compinstall filename "$HOME/.zshrc"
 
 autoload -U colors && colors
 autoload -Uz compinit && compinit
@@ -11,7 +11,7 @@ autoload -Uz compinit && compinit
 setopt autocd
 setopt nobeep
 
-PS1="%{${fg[green]}%}%B[%m@%~]%#%b "
+PS1="%{${fg[green]}%}%B[%m@%3~]%#%b "
 
 export BLOCKSIZE="K"
 export EDITOR="vim"
@@ -22,7 +22,7 @@ if which less >/dev/null; then
 	export PAGER="less"
 	export LESS="-R --clear-screen --quit-if-one-screen --ignore-case --SILENT --chop-long-lines --tabs=3"
 fi
-which cdiff >/dev/null && export PAGER_DIFF="cdiff"
+which ydiff >/dev/null && export PAGER_DIFF="ydiff"
 
 osname=$(uname -s)
 if [ "$osname" = "FreeBSD" ]; then
