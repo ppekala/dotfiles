@@ -28,6 +28,7 @@ set list
 set listchars=tab:»\ ,trail:·
 set nobackup
 set nowrap
+set path+=**
 set ruler
 set shiftwidth=2
 set smartcase
