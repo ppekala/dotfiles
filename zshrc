@@ -16,7 +16,7 @@ PS1="%{${fg[green]}%}%B[%m@%3~]%#%b "
 export BLOCKSIZE="K"
 export EDITOR="vim"
 export H="${HOME}"
-export LSCOLORS="Exfxcxdxbxegedabagacad"
+export LSCOLORS="Dxfxcxdxbxegedabagacad"
 which most >/dev/null && export MANPAGER="most"
 if which less >/dev/null; then
 	export PAGER="less"
