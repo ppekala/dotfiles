@@ -48,6 +48,7 @@ nnoremap <silent> <C-T>c :tabclose<CR>
 nnoremap <silent> <C-T><Left> :tabprevious<CR>
 nnoremap <silent> <C-T><Right> :tabnext<CR>
 
+highlight Normal ctermbg=black ctermfg=white
 highlight SpellBad ctermfg=red ctermbg=NONE guifg=red guibg=NONE
 autocmd FileType gitcommit,svn setlocal spell syntax=off
 autocmd FileType make setlocal shiftwidth=8 tabstop=8
