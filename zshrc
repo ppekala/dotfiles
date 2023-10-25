@@ -26,15 +26,15 @@ which ydiff >/dev/null && export PAGER_DIFF="ydiff"
 
 osname=$(uname -s)
 if [ "$osname" = "FreeBSD" ]; then
-	PORTSDIR="/usr/ports"
-	[ -d "${PORTSDIR}" ] || PORTSDIR=$(make -V PORTSDIR)
-	[ -d "${PORTSDIR}" ] && export PORTSDIR || unset PORTSDIR
-
 	PATH="${PATH}:${PORTSDIR}/Tools/scripts"
 	if [ $UID -ne 0 -a -n "$(id | grep wheel)" ]; then
 		PATH="${PATH}:/sbin:/usr/sbin:/usr/local/sbin"
 		alias spkg="sudo pkg"
 	fi
+
+	PORTSDIR="/usr/ports"
+	[ -d "${PORTSDIR}" ] || PORTSDIR=$(make -V PORTSDIR)
+	[ -d "${PORTSDIR}" ] && export PORTSDIR || unset PORTSDIR
 
 	alias ll="ls -Glh"
 	alias ls="ls -Gh"
@@ -44,6 +44,9 @@ fi
 if [ "$osname" = "Linux" ]; then
 	alias ll="ls -lh --color"
 	alias ls="ls -h --color"
+
+	cpus=$(cat /proc/cpuinfo | grep processor | wc -l)
+	alias make="make -j$cpus"
 fi
 
 [ -d "${HOME}/bin" ] && PATH="${PATH}:${HOME}/bin"
@@ -53,12 +56,6 @@ export PATH
 alias del="rm -i"
 which dfc >/dev/null && alias df="dfc" || alias df="df -h"
 alias du="du -h"
-
-if [ -n "${PAGER_DIFF}" ]; then
-	alias sdc="svn diff | ${PAGER_DIFF}"
-else
-	alias sdc="svn diff | ${PAGER}"
-fi
 
 [ -f "${HOME}/.zshuser" ] && . "${HOME}/.zshuser"
 
