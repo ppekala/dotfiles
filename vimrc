@@ -43,6 +43,7 @@ nnoremap <silent> <C-X> :bnext<CR>
 nnoremap <silent> <C-B><Left> :bprevious<CR>
 nnoremap <silent> <C-Z> :bprevious<CR>
 nnoremap <silent> <C-B>d :bdelete<CR>
+nnoremap <silent> <C-S> :write<CR>
 nnoremap <silent> <C-T>n :tabnew<CR>
 nnoremap <silent> <C-T>c :tabclose<CR>
 nnoremap <silent> <C-T><Left> :tabprevious<CR>
