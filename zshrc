@@ -24,6 +24,8 @@ if which less >/dev/null; then
 fi
 which ydiff >/dev/null && export PAGER_DIFF="ydiff"
 
+EXA="exa --long --header --git --group-directories-first --grid"
+
 osname=$(uname -s)
 if [ "$osname" = "FreeBSD" ]; then
 	PATH="${PATH}:${PORTSDIR}/Tools/scripts"
@@ -36,13 +38,15 @@ if [ "$osname" = "FreeBSD" ]; then
 	[ -d "${PORTSDIR}" ] || PORTSDIR=$(make -V PORTSDIR)
 	[ -d "${PORTSDIR}" ] && export PORTSDIR || unset PORTSDIR
 
-	alias ll="ls -Glh"
+	which exa >/dev/null && alias ll=$EXA || alias ll="ls -Glh"
 	alias ls="ls -Gh"
 	alias top="top -PI"
 fi
 
 if [ "$osname" = "Linux" ]; then
-	alias ll="ls -lh --color"
+	[ $UID -ne 0 -a -f "/etc/debian_version" ] && alias apt="sudo apt"
+
+	which exa >/dev/null && alias ll=$EXA || alias ll="ls -lh --color"
 	alias ls="ls -h --color"
 
 	cpus=$(cat /proc/cpuinfo | grep processor | wc -l)
@@ -56,6 +60,8 @@ export PATH
 alias del="rm -i"
 which dfc >/dev/null && alias df="dfc" || alias df="df -h"
 alias du="du -h"
+
+unset EXA
 
 [ -f "${HOME}/.zshuser" ] && . "${HOME}/.zshuser"
 
