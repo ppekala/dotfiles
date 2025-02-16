@@ -4,6 +4,11 @@ srcdir=$(realpath "${0%/*}")
 homedir=$(realpath "$HOME")
 confdir=${srcdir#$homedir/}
 
+osname=$(uname -s)
+if [ "$osname" = "FreeBSD" ]; then
+	sudo pkg install dfc exa most mutt vim zsh ydiff
+fi
+
 cd "$HOME"
 for config in conkyrc mostrc muttrc vimrc zshrc; do
 	[ -e .$config ] || ln -sv "$confdir/$config" .$config
