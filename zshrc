@@ -31,7 +31,7 @@ if [ "$osname" = "FreeBSD" ]; then
 	PATH="${PATH}:${PORTSDIR}/Tools/scripts"
 	if [ $UID -ne 0 -a -n "$(id | grep wheel)" ]; then
 		PATH="${PATH}:/sbin:/usr/sbin:/usr/local/sbin"
-		alias spkg="sudo pkg"
+		alias pkg="sudo pkg"
 	fi
 
 	PORTSDIR="/usr/ports"
