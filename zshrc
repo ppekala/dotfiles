@@ -44,8 +44,18 @@ if [ "$osname" = "FreeBSD" ]; then
 fi
 
 if [ "$osname" = "Linux" ]; then
-	[ $UID -ne 0 -a -f "/etc/debian_version" ] && alias apt="sudo apt"
-
+	if [ -f "/etc/debian_version" ]; then
+		apt() {
+			[ $UID -ne 0 ] && SUDO="sudo" || SUDO=""
+			case $1 in
+				changelog|download|list|policy|rdepends|search|show|showsrc|source)
+					/usr/bin/apt $* ;;
+				*)
+					$SUDO /usr/bin/apt $* ;;
+			esac
+			unset SUDO
+		}
+	fi
 	which exa >/dev/null && alias ll=$EXA || alias ll="ls -lh --color"
 	alias ls="ls -h --color"
 
