@@ -26,8 +26,8 @@ which ydiff >/dev/null && export PAGER_DIFF="ydiff"
 
 EXA="exa --long --header --git --group-directories-first --grid"
 
-osname=$(uname -s)
-if [ "$osname" = "FreeBSD" ]; then
+case $OSTYPE in
+freebsd*)
 	PATH="${PATH}:${PORTSDIR}/Tools/scripts"
 	if [ $UID -ne 0 -a -n "$(id | grep wheel)" ]; then
 		PATH="${PATH}:/sbin:/usr/sbin:/usr/local/sbin"
@@ -41,27 +41,32 @@ if [ "$osname" = "FreeBSD" ]; then
 	which exa >/dev/null && alias ll=$EXA || alias ll="ls -Glh"
 	alias ls="ls -Gh"
 	alias top="top -PI"
-fi
+	;;
 
-if [ "$osname" = "Linux" ]; then
-	if [ -f "/etc/debian_version" ]; then
-		apt() {
-			[ $UID -ne 0 ] && SUDO="sudo" || SUDO=""
-			case $1 in
-				changelog|download|list|policy|rdepends|search|show|showsrc|source)
-					/usr/bin/apt $* ;;
-				*)
-					$SUDO /usr/bin/apt $* ;;
-			esac
-			unset SUDO
-		}
-	fi
+linux*)
+	[ "$VENDOR" = "debian" ] || break
+
+	apt() {
+		[ $UID -ne 0 ] && SUDO="sudo" || SUDO=""
+		case $1 in
+			changelog|download|list|policy|rdepends|search|show|showsrc|source)
+				/usr/bin/apt $* ;;
+			*)
+				$SUDO /usr/bin/apt $* ;;
+		esac
+		unset SUDO
+	}
+
 	which exa >/dev/null && alias ll=$EXA || alias ll="ls -lh --color"
 	alias ls="ls -h --color"
 
 	cpus=$(cat /proc/cpuinfo | grep processor | wc -l)
 	alias make="make -j$cpus"
-fi
+	;;
+
+*)
+	echo "Unsupported platform: $OSTYPE-$VENDOR" ;;
+esac
 
 [ -d "${HOME}/bin" ] && PATH="${PATH}:${HOME}/bin"
 export PATH
