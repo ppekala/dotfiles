@@ -44,18 +44,18 @@ freebsd*)
 	;;
 
 linux*)
-	[ "$VENDOR" = "debian" ] || break
-
-	apt() {
-		[ $UID -ne 0 ] && SUDO="sudo" || SUDO=""
-		case $1 in
-			changelog|download|list|policy|rdepends|search|show|showsrc|source)
-				/usr/bin/apt $* ;;
-			*)
-				$SUDO /usr/bin/apt $* ;;
-		esac
-		unset SUDO
-	}
+	if [ "$VENDOR" = "debian" -o "$VENDOR" = "ubuntu" ]; then
+		apt() {
+			[ $UID -ne 0 ] && SUDO="sudo" || SUDO=""
+			case $1 in
+				changelog|download|list|policy|rdepends|search|show|showsrc|source)
+					/usr/bin/apt $* ;;
+				*)
+					$SUDO /usr/bin/apt $* ;;
+			esac
+			unset SUDO
+		}
+	fi
 
 	which exa >/dev/null && alias ll=$EXA || alias ll="ls -lh --color"
 	alias ls="ls -h --color"
