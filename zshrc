@@ -28,17 +28,30 @@ EXA="exa --long --header --git --group-directories-first --grid"
 
 case $OSTYPE in
 freebsd*)
-	PATH="${PATH}:${PORTSDIR}/Tools/scripts"
-	if [ $UID -ne 0 -a -n "$(id | grep wheel)" ]; then
-		PATH="${PATH}:/sbin:/usr/sbin:/usr/local/sbin"
-		alias pkg="sudo pkg"
-	fi
+	[ $UID -ne 0 ] && PATH="${PATH}:/sbin:/usr/sbin:/usr/local/sbin"
 
 	PORTSDIR="/usr/ports"
 	[ -d "${PORTSDIR}" ] || PORTSDIR=$(make -V PORTSDIR)
-	[ -d "${PORTSDIR}" ] && export PORTSDIR || unset PORTSDIR
+	if [ -d "${PORTSDIR}" ]; then
+		export PORTSDIR
+		PATH="${PATH}:${PORTSDIR}/Tools/scripts"
+	else
+		unset PORTSDIR
+	fi
+
+	pkg() {
+		[ $UID -ne 0 ] && SUDO="sudo"
+		case $1 in
+			add|autoremove|check|clean|delete|fetch|lock|install|register|remove| \
+			set|update|unlock|upgrade)
+				$SUDO /usr/sbin/pkg $* ;;
+			*)
+				/usr/sbin/pkg $* ;;
+		esac
+	}
 
 	which exa >/dev/null && alias ll=$EXA || alias ll="ls -Glh"
+	alias gmake="gmake -j$(nproc)"
 	alias ls="ls -Gh"
 	alias top="top -PI"
 	;;
@@ -46,22 +59,19 @@ freebsd*)
 linux*)
 	if [ "$VENDOR" = "debian" -o "$VENDOR" = "ubuntu" ]; then
 		apt() {
-			[ $UID -ne 0 ] && SUDO="sudo" || SUDO=""
+			[ $UID -ne 0 ] && SUDO="sudo"
 			case $1 in
 				changelog|download|list|policy|rdepends|search|show|showsrc|source)
 					/usr/bin/apt $* ;;
 				*)
 					$SUDO /usr/bin/apt $* ;;
 			esac
-			unset SUDO
 		}
 	fi
 
 	which exa >/dev/null && alias ll=$EXA || alias ll="ls -lh --color"
 	alias ls="ls -h --color"
-
-	cpus=$(cat /proc/cpuinfo | grep processor | wc -l)
-	alias make="make -j$cpus"
+	alias make="make -j$(nproc)"
 	;;
 
 *)
