@@ -61,10 +61,11 @@ linux*)
 		apt() {
 			[ $UID -ne 0 ] && SUDO="sudo"
 			case $1 in
-				changelog|download|list|policy|rdepends|search|show|showsrc|source)
-					/usr/bin/apt $* ;;
-				*)
+				autoclean|autoremove|build-dep|dist-upgrade|edit-sources| \
+				full-upgrade|install|purge|reinstall|remove|update|upgrade)
 					$SUDO /usr/bin/apt $* ;;
+				*)
+					/usr/bin/apt $* ;;
 			esac
 		}
 	fi
