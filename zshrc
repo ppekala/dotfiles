@@ -24,7 +24,7 @@ if which less >/dev/null; then
 fi
 which ydiff >/dev/null && export PAGER_DIFF="ydiff"
 
-EXA="exa --long --header --git --group-directories-first --grid"
+EXA="exa --long --header --group-directories-first --grid"
 
 case $OSTYPE in
 freebsd*)
@@ -50,7 +50,7 @@ freebsd*)
 		esac
 	}
 
-	which exa >/dev/null && alias ll=$EXA || alias ll="ls -Glh"
+	which exa >/dev/null && alias ll="$EXA --git" || alias ll="ls -Glh"
 	alias gmake="gmake -j$(nproc)"
 	alias ls="ls -Gh"
 	alias top="top -PI"
@@ -70,7 +70,10 @@ linux*)
 		}
 	fi
 
-	which exa >/dev/null && alias ll=$EXA || alias ll="ls -lh --color"
+	which exa >/dev/null &&
+		alias ll="$EXA $( (exa -v | grep -q '+git') && echo '--git' )" ||
+		alias ll="ls -lh --color"
+
 	alias ls="ls -h --color"
 	alias make="make -j$(nproc)"
 	;;
