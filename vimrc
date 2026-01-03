@@ -20,6 +20,7 @@ syntax enable
 let g:airline_theme='murmur'
 
 set backspace=indent,eol,start
+set completeopt=menuone,noinsert,noselect
 set dir=~/tmp
 set hidden
 set ignorecase
