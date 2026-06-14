@@ -36,7 +36,7 @@ set smartcase
 set t_Co=256
 set tabstop=2
 
-nnoremap <silent> <F2> :NERDTree<CR>
+nnoremap <silent> <F2> :NERDTreeToggle<CR>
 nnoremap <silent> <F3> :set spell!<CR>
 nnoremap <silent> <F12> :BufExplorer<CR>
 nnoremap <silent> <C-B><Right> :bnext<CR>
