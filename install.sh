@@ -6,7 +6,7 @@ confdir=${srcdir#$homedir/}
 
 osname=$(uname -s)
 if [ "$osname" = "FreeBSD" ]; then
-	sudo pkg install dfc exa most mutt vim zsh ydiff
+	sudo pkg install bat dfc exa fzf most mutt ripgrep vim zsh ydiff
 fi
 
 cd "$HOME"

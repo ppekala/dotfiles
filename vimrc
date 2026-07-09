@@ -9,7 +9,8 @@ Plugin 'jlanzarotta/bufexplorer'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'vim-scripts/SearchComplete'
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -18,6 +19,7 @@ colorscheme delek
 syntax enable
 
 let g:airline_theme='murmur'
+let g:NERDTreeQuitOnOpen=1          "close window on file select
 
 set backspace=indent,eol,start
 set completeopt=menuone,noinsert,noselect
@@ -33,22 +35,19 @@ set path+=**
 set ruler
 set shiftwidth=2
 set smartcase
-set t_Co=256
 set tabstop=2
 
+map <Space> <Leader>
+nnoremap <silent> <Leader>s :Rg!<CR>
 nnoremap <silent> <F2> :NERDTreeToggle<CR>
 nnoremap <silent> <F3> :set spell!<CR>
-nnoremap <silent> <F12> :BufExplorer<CR>
+nnoremap <silent> <F12> :BufExplorerVerticalSplit<CR>
 nnoremap <silent> <C-B><Right> :bnext<CR>
 nnoremap <silent> <C-X> :bnext<CR>
 nnoremap <silent> <C-B><Left> :bprevious<CR>
 nnoremap <silent> <C-Z> :bprevious<CR>
 nnoremap <silent> <C-B>d :bdelete<CR>
 nnoremap <silent> <C-S> :write<CR>
-nnoremap <silent> <C-T>n :tabnew<CR>
-nnoremap <silent> <C-T>c :tabclose<CR>
-nnoremap <silent> <C-T><Left> :tabprevious<CR>
-nnoremap <silent> <C-T><Right> :tabnext<CR>
 
 highlight Normal ctermbg=black ctermfg=white
 highlight SpellBad ctermfg=red ctermbg=NONE guifg=red guibg=NONE
