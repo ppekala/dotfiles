@@ -44,7 +44,8 @@ freebsd*)
 		case $1 in
 			add|autoremove|check|clean|delete|fetch|lock|install|register|remove| \
 			set|update|unlock|upgrade)
-				$SUDO /usr/sbin/pkg $* ;;
+				$SUDO /usr/sbin/pkg $*
+				rehash ;;
 			*)
 				/usr/sbin/pkg $* ;;
 		esac
@@ -63,7 +64,8 @@ linux*)
 			case $1 in
 				autoclean|autoremove|build-dep|dist-upgrade|edit-sources| \
 				full-upgrade|install|purge|reinstall|remove|update|upgrade)
-					$SUDO /usr/bin/apt $* ;;
+					$SUDO /usr/bin/apt $*
+					rehash ;;
 				*)
 					/usr/bin/apt $* ;;
 			esac

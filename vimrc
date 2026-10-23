@@ -38,10 +38,13 @@ set smartcase
 set tabstop=2
 
 map <Space> <Leader>
+nnoremap <silent> <Leader>cc :cwindow<CR>
+nnoremap <silent> <Leader>c<Right> :cnext<CR>
+nnoremap <silent> <Leader>c<Left> :cprevious<CR>
 nnoremap <silent> <Leader>s :Rg!<CR>
 nnoremap <silent> <F2> :NERDTreeToggle<CR>
 nnoremap <silent> <F3> :set spell!<CR>
-nnoremap <silent> <F12> :BufExplorerVerticalSplit<CR>
+nnoremap <silent> <F12> :BufExplorer<CR>
 nnoremap <silent> <C-B><Right> :bnext<CR>
 nnoremap <silent> <C-X> :bnext<CR>
 nnoremap <silent> <C-B><Left> :bprevious<CR>
