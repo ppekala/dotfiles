@@ -61,8 +61,9 @@ linux*)
 		apt() {
 			[ $UID -ne 0 ] && SUDO="sudo"
 			case $1 in
-				autoclean|autoremove|build-dep|dist-upgrade|edit-sources| \
-				full-upgrade|install|purge|reinstall|remove|update|upgrade)
+				autoclean|autoremove|build-dep|clean|distclean|dist-upgrade| \
+				edit-sources|full-upgrade|install|purge|reinstall|remove| \
+				update|upgrade)
 					$SUDO /usr/bin/apt $* ;;
 				*)
 					/usr/bin/apt $* ;;
